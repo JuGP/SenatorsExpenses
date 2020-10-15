@@ -1,0 +1,25 @@
+<p>
+  <mat-toolbar color="primary">
+    <span>SENADORES</span>
+  </mat-toolbar>
+</p>
+
+<table mat-table [dataSource]="senators" class="mat-elevation-z8">
+
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let senator">{{ senator.id }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let senator">{{ senator.name | titlecase}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'name']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'name']"
+    (click)="onRowClicked(row.id)"
+  ></tr>
+</table>

@@ -1,0 +1,69 @@
+<div *ngIf="isLoaded">
+  <p>
+    <mat-toolbar color="primary">
+      <span>{{senatorName}}</span>
+    </mat-toolbar>
+  </p>
+
+  <p>
+    <mat-toolbar color="secondary">
+      <span>Resumo das despesas</span>
+    </mat-toolbar>
+  </p>
+
+  <table mat-table [dataSource]="reports" class="mat-elevation-z8">
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Tipo</th>
+      <td mat-cell *matCellDef="let report">{{ report.id | expenseType }}</td>
+      <td mat-footer-cell *matFooterCellDef><strong>Total</strong></td>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Valor</th>
+      <td mat-cell *matCellDef="let report">{{ report.amount | currency:'BRL':'R$'}}</td>
+      <td mat-footer-cell *matFooterCellDef> {{ totalAmount | currency:'BRL':'R$'}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="['type', 'amount']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['type', 'amount']"></tr>
+    <tr mat-footer-row *matFooterRowDef="['type', 'amount']"></tr>
+  </table>
+
+  <p>
+    <mat-toolbar color="secondary">
+      <span>Despesas</span>
+    </mat-toolbar>
+  </p>
+
+  <table mat-table [dataSource]="expenses" class="mat-elevation-z8">
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Tipo</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.id | expenseType }}</td>
+    </ng-container>
+
+    <!-- Provider Column -->
+    <ng-container matColumnDef="provider">
+      <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.provider | titlecase }}</td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Data</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.date | date: 'dd/MM/yyyy'}}</td>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Valor</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.amount | currency:'BRL':'R$'}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['type', 'provider', 'date', 'amount']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['type', 'provider', 'date', 'amount']"></tr>
+  </table>
+
+</div>

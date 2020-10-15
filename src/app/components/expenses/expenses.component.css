@@ -1,0 +1,22 @@
+table { 
+  border-collapse: collapse;
+  border-spacing: 1%;
+  width: 96%;
+  margin: 2%;
+}
+
+
+table td[class$="date"],
+table td[class$="amount"]{
+  text-align: center; 
+}
+
+table th{
+  text-align: center; 
+}
+
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
